@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Tap: Auto Clicker Tool — Support</title>
+    <meta name="description" content="Support page for Quick Tap: Auto Clicker Tool. Get help, read FAQs, and contact us.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a26;
+            --border: #1e1e2e;
+            --text: #e4e4ec;
+            --text-muted: #8888a0;
+            --accent: #6c5ce7;
+            --accent-light: #a29bfe;
+            --accent-glow: rgba(108, 92, 231, 0.15);
+            --success: #00cec9;
+            --radius: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Grain overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .glow-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(108,92,231,0.08) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-orb-2 {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,206,201,0.05) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* NAV */
+        nav {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 60px;
+        }
+
+        nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Instrument Serif', serif;
+            font-size: 22px;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent-light);
+        }
+
+        nav a.nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a.nav-link:hover {
+            color: var(--text);
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 40px 0 80px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: var(--accent-glow);
+            color: var(--accent-light);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(40px, 7vw, 64px);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+        }
+
+        h1 em {
+            color: var(--accent-light);
+            font-style: italic;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 17px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* SECTIONS */
+        section {
+            margin-bottom: 80px;
+        }
+
+        h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h2 .section-num {
+            color: var(--accent-light);
+            font-size: 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        /* FAQ */
+        .faq-item {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: #2a2a3e;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: var(--bg-card);
+            border: none;
+            color: var(--text);
+            padding: 20px 24px;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: 'DM Sans', sans-serif;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .faq-question .icon {
+            font-size: 20px;
+            color: var(--accent-light);
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+
+        .faq-item.open .faq-question .icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+        }
+
+        .faq-answer-inner {
+            padding: 0 24px 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.8;
+            background: var(--bg-card);
+        }
+
+        /* CONTACT FORM */
+        .form-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238888a0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+        }
+
+        select option {
+            background: var(--bg-card);
+            color: var(--text);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover {
+            background: #7c6ef0;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 30px rgba(108, 92, 231, 0.25);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* PRIVACY */
+        .privacy-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px;
+        }
+
+        .privacy-content h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 20px;
+            font-weight: 400;
+            margin: 28px 0 12px;
+        }
+
+        .privacy-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .privacy-content p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+
+        .privacy-content ul {
+            color: var(--text-muted);
+            font-size: 14px;
+            padding-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        .privacy-content li {
+            margin-bottom: 6px;
+            line-height: 1.7;
+        }
+
+        .last-updated {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            background: var(--accent-glow);
+            color: var(--accent-light);
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        footer a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        /* SUCCESS MESSAGE */
+        .success-msg {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-msg .check {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(0, 206, 201, 0.1);
+            border: 2px solid var(--success);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+
+        .success-msg h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .success-msg p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* SCROLL NAV LINKS */
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 0 16px; }
+            .form-card { padding: 24px; }
+            .privacy-content { padding: 24px; }
+            h1 { font-size: 36px; }
+            .nav-links { gap: 16px; }
+            nav a.nav-link { font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="glow-orb"></div>
+<div class="glow-orb-2"></div>
+
+<nav>
+    <div class="container">
+        <a href="#" class="logo">Quick<span>Tap</span></a>
+        <div class="nav-links">
+            <a href="#faq" class="nav-link">FAQ</a>
+            <a href="#contact" class="nav-link">Contact</a>
+            <a href="#privacy" class="nav-link">Privacy</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- HERO -->
+    <section class="hero animate">
+        <div class="hero-badge">Support Center</div>
+        <h1>How can we <em>help</em> you?</h1>
+        <p>Find answers below or reach out to us directly. We typically respond within 24 hours.</p>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="animate delay-1">
+        <h2>
+            <span class="section-num">01 — FAQ</span>
+            Frequently Asked Questions
+        </h2>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                What is Quick Tap: Auto Clicker Tool?
+                <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    Quick Tap is a fast and easy-to-use auto clicker for iPhone and iPad. It automates repetitive screen taps so you don't have to do them manually. Perfect for games, idle clickers, and any app that requires repeated tapping.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Is Quick Tap free to use?
+                <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    Quick Tap is free to download with core features available at no cost. Some advanced features may be available through optional in-app purchases.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                How do I set up an auto clicker?
+                <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    Simply open Quick Tap, choose your tap mode (single point or multi-touch), set your desired speed and interval, position the floating control panel, and hit start. The auto clicker will begin tapping automatically.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Can I set multiple tap points?
+                <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    Yes! Quick Tap supports multi-touch points. You can add as many click points as you need on the screen, and the app will cycle through them automatically at your configured speed.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Does Quick Tap work with all apps and games?
+                <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    Quick Tap works with most apps and games on iOS. However, some apps may have their own restrictions on automated input. Please note that using auto clickers may violate the terms of service of certain games.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Does the app collect my personal data?
+                <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    No. Quick Tap runs entirely on your device. We do not collect, store, or share any personal data. Your privacy is fully protected. See our Privacy Policy below for full details.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                What iOS version is required?
+                <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    Quick Tap requires iOS 16.0 or later and is compatible with iPhone and iPad.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="animate delay-2">
+        <h2>
+            <span class="section-num">02 — Contact</span>
+            Get in Touch
+        </h2>
+
+        <div class="form-card">
+            <form id="contactForm" action="https://formsubmit.co/javiseowebs@gmail.com" method="POST">
+                <!-- FormSubmit config -->
+                <input type="hidden" name="_subject" value="Quick Tap Support Request">
+                <input type="hidden" name="_captcha" value="true">
+                <input type="hidden" name="_template" value="box">
+                <input type="text" name="_honey" style="display:none">
+                <input type="hidden" name="_next" value="">
+
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="you@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="topic">Topic</label>
+                    <select id="topic" name="topic" required>
+                        <option value="" disabled selected>Select a topic</option>
+                        <option value="Bug Report">Bug Report</option>
+                        <option value="Feature Request">Feature Request</option>
+                        <option value="How to Use">How to Use</option>
+                        <option value="Account & Billing">Account & Billing</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Describe your issue or question..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+
+            <div class="success-msg" id="successMsg">
+                <div class="check">✓</div>
+                <h3>Message Sent!</h3>
+                <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRIVACY POLICY -->
+    <section id="privacy" class="animate delay-3">
+        <h2>
+            <span class="section-num">03 — Legal</span>
+            Privacy Policy
+        </h2>
+
+        <div class="privacy-content">
+            <h3>Introduction</h3>
+            <p>This Privacy Policy describes how Quick Tap: Auto Clicker Tool ("we", "our", or "the app") handles information when you use our mobile application. We are committed to protecting your privacy.</p>
+
+            <h3>Information We Collect</h3>
+            <p>Quick Tap does <strong>not</strong> collect, store, transmit, or share any personal information or usage data. The app runs entirely on your device with no server-side processing.</p>
+
+            <h3>Data Storage</h3>
+            <p>All app settings and configurations (such as tap speed, positions, and intervals) are stored locally on your device. This data is never transmitted to external servers.</p>
+
+            <h3>Third-Party Services</h3>
+            <p>Quick Tap does not integrate with any third-party analytics, advertising, or tracking services. We do not use cookies or similar tracking technologies.</p>
+
+            <h3>Children's Privacy</h3>
+            <p>Quick Tap does not knowingly collect any personal information from children under the age of 13. Since we do not collect any data at all, no special provisions are necessary.</p>
+
+            <h3>Changes to This Policy</h3>
+            <p>We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated revision date.</p>
+
+            <h3>Contact Us</h3>
+            <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+            <p><a href="mailto:javiseowebs@gmail.com" style="color: var(--accent-light);">javiseowebs@gmail.com</a></p>
+
+            <div class="last-updated">Last updated: February 2025</div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2025 Quick Tap: Auto Clicker Tool. All rights reserved.</p>
+        <p style="margin-top: 8px;"><a href="mailto:javiseowebs@gmail.com">javiseowebs@gmail.com</a></p>
+    </div>
+</footer>
+
+<script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains('open');
+
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+
+            // Toggle current
+            if (!isOpen) item.classList.add('open');
+        });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // Set _next to current page URL (for FormSubmit redirect after submission)
+    const nextInput = document.querySelector('input[name="_next"]');
+    if (nextInput) nextInput.value = window.location.href;
+</script>
+
+</body>
+</html>
